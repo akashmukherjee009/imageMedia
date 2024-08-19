@@ -1,14 +1,28 @@
 import express from 'express';
+import multer from "multer";
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { getAllPost, createPost, getOnePost, updateOnePOst, deleteOnePost } from '../controllers/postController.js';
-
 
 const router = express.Router();
 
+// Configure multer storage
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(path.dirname(fileURLToPath(import.meta.url)), '../uploads/'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
 
-router.get('/',getAllPost)
-router.post('/',createPost)
-router.get('/posts/:id', getOnePost)
-router.put('/posts/:id', updateOnePOst)
-router.delete('/posts/:id', deleteOnePost)
+const upload = multer({ storage: storage });
 
-export default router
+// Apply `upload.single('image')` middleware to the POST route
+router.get('/', getAllPost);
+router.post('/', upload.single('image'), createPost);
+router.get('/:id', getOnePost);
+router.put('/:id', updateOnePOst);
+router.delete('/:id', deleteOnePost);
+
+export default router;

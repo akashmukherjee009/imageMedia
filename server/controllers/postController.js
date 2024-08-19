@@ -1,9 +1,17 @@
 import Post from "../models/postModel.js";
 
 
-export const createPost= async (req, res) => {
+
+
+export const createPost = async (req, res) => {
     try {
-        const newPost = new Post(req.body);
+        const newPost = new Post({
+            profile_id: req.body.profile_id,
+            caption: req.body.caption,
+            image: req.file ? `/uploads/${req.file.filename}` : null, // Store image path
+            likes: req.body.likes || 0,
+        });
+
         await newPost.save();
         res.status(201).json(newPost);
     } catch (error) {
