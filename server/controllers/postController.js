@@ -10,6 +10,7 @@ export const createPost = async (req, res) => {
             caption: req.body.caption,
             image: req.file ? `/uploads/${req.file.filename}` : null, // Store image path
             likes: req.body.likes || 0,
+            eventId: req.body.eventId
         });
 
         await newPost.save();
