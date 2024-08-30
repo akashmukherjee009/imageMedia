@@ -17,6 +17,8 @@ const __dirname = path.dirname(__filename);
 app.use(bodyParser.json());
 
 // Use post routes
+
+
 app.use('/posts', postRoutes);
 app.use('/actions', postActions);
 app.use('/events', eventRoutes);
