@@ -28,6 +28,21 @@ export const getAllEvents = async (req, res) => {
     }
 };
 
+//comment a code
+// Get event by id  
+export const getEventById = async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id);
+        if (!event) {
+            return res.status(404).json({ message: "Event not found" });
+        }
+    res.status(200).json(event);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
 // Get a single event by ID
 export const getOneEvent = async (req, res) => {
     try {
