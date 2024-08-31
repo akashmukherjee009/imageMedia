@@ -50,7 +50,7 @@ function Navbar() {
         <div
           className={
             isLightMode
-              ? "logo text-[#219ebc] text-md md:text-lg lg:text-xl flex items-center gap-2 font-semibold"
+              ? "logo text-[#00e0bf] text-md md:text-lg lg:text-xl flex items-center gap-2 font-semibold"
               : "logo text-white text-md md:text-lg lg:text-xl flex items-center gap-2 font-semibold"
           }
         >
@@ -59,7 +59,7 @@ function Navbar() {
         <div
           className={
             isLightMode
-              ? "flex gap-3 text-sm md:text-md lg:text-lg text-[#219ebc] w-[50%] justify-center items-center"
+              ? "flex gap-3 text-sm md:text-md lg:text-lg text-[#00e0bf] w-[50%] justify-center items-center"
               : "flex gap-3 text-sm md:text-md lg:text-lg text-white w-[50%] justify-center items-center"
           }
         >
@@ -98,7 +98,7 @@ function Navbar() {
               <FiSun size={24} />
             </div>
           )}
-        <button className="w-[90px] h-[40px] bg-[#219ebc] rounded-md text-white" onClick={() => {
+        <button className="w-[90px] h-[40px] bg-[#00e0bf] rounded-md text-white" onClick={() => {
             navigate("/sign-in")
         }}>Sign In</button>
           {/* {isLoggedIn ? (
@@ -118,8 +118,8 @@ function Navbar() {
                 // onClick={signOutFromCurrentAccount}
                 className={
                   isLightMode
-                    ? "w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#219ebc] border-2 border-[#8ecae6] rounded-lg"
-                    : "w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#219ebc] border-2 border-[#219ebc] rounded-lg"
+                    ? "w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#00e0bf] border-2 border-[#8ecae6] rounded-lg"
+                    : "w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#00e0bf] border-2 border-[#00e0bf] rounded-lg"
                 }
               >
                 <FaSignOutAlt />
@@ -128,7 +128,7 @@ function Navbar() {
           ) : (
             <button
             //   onClick={() => navigate("/sign-in")}
-              className="w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#219ebc] border-2 border-[#8ecae6] rounded-lg"
+              className="w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#00e0bf] border-2 border-[#8ecae6] rounded-lg"
             >
               <FaSignInAlt />
             </button>
