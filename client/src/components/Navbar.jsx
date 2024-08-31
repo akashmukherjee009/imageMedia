@@ -8,26 +8,49 @@ import { MdMonochromePhotos } from "react-icons/md";
 import { FaRegMoon } from "react-icons/fa";
 
 function Navbar() {
-  const { isLightMode, setIsLightMode } = useContext(GlobalState);
-  const navigate = useNavigate()
+  const {
+    isLightMode,
+    setIsLightMode,
+    showSignOutButton,
+    setShowSignOutButton,
+  } = useContext(GlobalState);
 
-//   const handleAlertTimeOut = () => {
-//     setShowSignInAlert(true);
-//     setTimeout(() => {
-//       setShowSignInAlert(false);
-//     }, 3000);
-//   };
+  const navigate = useNavigate();
 
-//   const handleShowSignInAlert = () => {
-//     if (!isLoggedIn) {
-//       setShowSignInAlert(true);
-//       handleAlertTimeOut();
-//     } else {
-//       setShowSignInAlert(false);
-//     }
-//   };
+  //   const handleAlertTimeOut = () => {
+  //     setShowSignInAlert(true);
+  //     setTimeout(() => {
+  //       setShowSignInAlert(false);
+  //     }, 3000);
+  //   };
 
+  //   const handleShowSignInAlert = () => {
+  //     if (!isLoggedIn) {
+  //       setShowSignInAlert(true);
+  //       handleAlertTimeOut();
+  //     } else {
+  //       setShowSignInAlert(false);
+  //     }
+  //   };
 
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  
+
+  useEffect(() => {
+    if (currentUser) {
+      setShowSignOutButton(true);
+    } else {
+      setShowSignOutButton(false);
+    }
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+    setShowSignOutButton(false);
+  };
 
   const handleTheme = () => {
     if (isLightMode) {
@@ -67,13 +90,19 @@ function Navbar() {
             {" "}
             Home
           </Link>
-          <Link to="/create-event" className="flex gap-2 justify-center items-center">
+          <Link
+            to="/create-event"
+            className="flex gap-2 justify-center items-center"
+          >
             {" "}
-            Event 
+            Event
           </Link>
-          <Link to="/pricing" className="flex gap-2 justify-center items-center">
+          <Link
+            to="/pricing"
+            className="flex gap-2 justify-center items-center"
+          >
             {" "}
-            Pricing 
+            Pricing
           </Link>
           {/* {isLoggedIn ? (
             <Link to="/post" className="flex gap-2 justify-center items-center">
@@ -98,41 +127,24 @@ function Navbar() {
               <FiSun size={24} />
             </div>
           )}
-        <button className="w-[90px] h-[40px] bg-[#00e0bf] rounded-md text-white" onClick={() => {
-            navigate("/sign-in")
-        }}>Sign In</button>
-          {/* {isLoggedIn ? (
-            <>
-              {profilePhoto ? (
-                <img
-                  src={profilePhoto}
-                  alt="profile-photo"
-                  className="hidden md:block lg:block md:w-10 md:h-10 rounded-full"
-                />
-              ) : (
-                <div className="w-10 h-10 rounded-full bg-gray-300 flex justify-center items-center">
-                  <span>{auth.currentUser?.displayName?.charAt(0)}</span>
-                </div>
-              )}
-              <button
-                // onClick={signOutFromCurrentAccount}
-                className={
-                  isLightMode
-                    ? "w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#00e0bf] border-2 border-[#8ecae6] rounded-lg"
-                    : "w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#00e0bf] border-2 border-[#00e0bf] rounded-lg"
-                }
-              >
-                <FaSignOutAlt />
-              </button>
-            </>
+          {currentUser ? <div className="w-12 h-12 bg-blue-300 rounded-full flex justify-center items-center font-bold">{currentUser.name[0]}</div> : <div></div>}
+          {!showSignOutButton ? (
+            <button
+              className="w-[90px] h-[40px] bg-[#00e0bf] rounded-md text-white"
+              onClick={() => {
+                navigate("/sign-in");
+              }}
+            >
+              Sign In
+            </button>
           ) : (
             <button
-            //   onClick={() => navigate("/sign-in")}
-              className="w-[50px] flex justify-center items-center h-[34px] text-sm p-1 font-semibold text-white bg-[#00e0bf] border-2 border-[#8ecae6] rounded-lg"
+              className="w-[90px] h-[40px] bg-[#00e0bf] rounded-md text-white"
+              onClick={handleSignOut}
             >
-              <FaSignInAlt />
+              Sign Out
             </button>
-          )} */}
+          )}
         </div>
       </div>
     </>

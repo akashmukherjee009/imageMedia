@@ -14,11 +14,14 @@ function App() {
     Aos.init({ duration: 1000 });
   }, []);
   const [isLightMode, setIsLightMode] = useState(true);
+  const [showSignOutButton, setShowSignOutButton] = useState(null);
 
   return (
     <>
       <BrowserRouter>
-        <GlobalState.Provider value={{ isLightMode }}>
+        <GlobalState.Provider
+          value={{ isLightMode, showSignOutButton, setShowSignOutButton }}
+        >
           <div className="App">
             <Navbar />
             <Routing />
