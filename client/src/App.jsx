@@ -22,7 +22,7 @@ function App() {
         <GlobalState.Provider
           value={{ isLightMode, showSignOutButton, setShowSignOutButton }}
         >
-          <div className="App">
+          <div className="App relative">
             <Navbar />
             <Routing />
             <Footer />

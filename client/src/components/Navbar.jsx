@@ -35,8 +35,6 @@ function Navbar() {
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
-  
-
   useEffect(() => {
     if (currentUser) {
       setShowSignOutButton(true);
@@ -73,9 +71,12 @@ function Navbar() {
         <div
           className={
             isLightMode
-              ? "logo text-[#00e0bf] text-md md:text-lg lg:text-xl flex items-center gap-2 font-semibold"
-              : "logo text-white text-md md:text-lg lg:text-xl flex items-center gap-2 font-semibold"
+              ? "logo text-[#00e0bf] text-md md:text-lg lg:text-xl flex items-center gap-2 font-semibold cursor-pointer"
+              : "logo text-white text-md md:text-lg lg:text-xl flex items-center gap-2 font-semibold cursor-pointer"
           }
+          onClick={() => {
+            navigate("/");
+          }}
         >
           MomentsHub
         </div>
@@ -127,7 +128,13 @@ function Navbar() {
               <FiSun size={24} />
             </div>
           )}
-          {currentUser ? <div className="w-12 h-12 bg-blue-300 rounded-full flex justify-center items-center font-bold">{currentUser.name[0]}</div> : <div></div>}
+          {currentUser ? (
+            <div className="w-12 h-12 bg-blue-300 rounded-full flex justify-center items-center font-bold">
+              {currentUser.name[0]}
+            </div>
+          ) : (
+            <div></div>
+          )}
           {!showSignOutButton ? (
             <button
               className="w-[90px] h-[40px] bg-[#00e0bf] rounded-md text-white"

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import astronaut from "../assets/astronaut.jpg"
+import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
+  const navigate = useNavigate()
   return (
     <>
       <div className="w-full min-h-screen  flex flex-col md:flex-col lg:flex-row justify-between">
@@ -15,7 +17,9 @@ function LandingPage() {
             events. Whether it’s a wedding, a birthday, or a milestone
             celebration, keep your memories alive with EventSnap
           </p>
-          <button data-aos="zoom-in-left" className="w-[100px] md:w-[120px] lg:w-[150px] h-[44px] bg-[#219ebc] rounded-md text-white">
+          <button data-aos="zoom-in-left"
+          onClick={() => {navigate("/create-event")}}
+          className="w-[100px] md:w-[120px] lg:w-[150px] h-[44px] bg-[#219ebc] rounded-md text-white">
             Get Started
           </button>
         </div>
