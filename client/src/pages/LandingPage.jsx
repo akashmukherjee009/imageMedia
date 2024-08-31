@@ -5,7 +5,7 @@ function LandingPage() {
   return (
     <>
       <div className="w-full min-h-screen  flex flex-col md:flex-col lg:flex-row justify-between">
-        <div className="w-[100%] h-auto lg:w-[40%] p-5 pl-12 flex flex-col gap-5 justify-center items-center lg:items-start">
+        <div className="w-[100%] h-auto lg:w-[40%] p-5 pl-12 flex flex-col gap-0 justify-center items-center lg:items-start">
           <header data-aos="zoom-in-down" className="font-bold text-3xl md:text-4xl lg:text-5xl text-center lg:text-start">
             Capture, Store, and Relive Your Special Moments
           </header>
