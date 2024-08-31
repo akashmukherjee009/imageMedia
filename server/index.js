@@ -4,6 +4,8 @@ import postRoutes from './routes/postRoute.js';
 import postActions from './routes/postAction.js';
 import eventRoutes from './routes/eventRoute.js';
 import bodyParser from 'body-parser';
+import cors  from 'cors';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -15,7 +17,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(bodyParser.json());
-
+app.use(cors())
 // Use post routes
 
 
