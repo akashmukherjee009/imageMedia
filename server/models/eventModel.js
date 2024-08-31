@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const eventSchema = new mongoose.Schema({
-    profile_id: { type: String, required: true },
+    userEmail: { type: String, required: true },
     caption: { type: String, required: true },
     date: {type:Date, required: true},
     interested: { type: Number, default: 0 },

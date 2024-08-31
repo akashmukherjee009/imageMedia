@@ -4,7 +4,7 @@ import Event from '../models/eventModel.js';
 export const createEvent = async (req, res) => {
     try {
         const newEvent = new Event({
-            profile_id: req.body.profile_id,
+            userEmail: req.body.userEmail,
             caption: req.body.caption,
             date: req.body.date,
             interested: req.body.interested || 0,
@@ -21,7 +21,7 @@ export const createEvent = async (req, res) => {
 // Get all events
 export const getAllEvents = async (req, res) => {
     try {
-        const events = await Event.find();
+        const events = await Event.find({userEmail: req.body.email});
         res.status(200).json(events);
     } catch (error) {
         res.status(500).json({ message: error.message });
