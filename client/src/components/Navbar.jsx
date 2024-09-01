@@ -7,31 +7,19 @@ import { FiSun } from "react-icons/fi";
 import { MdMonochromePhotos } from "react-icons/md";
 import { FaRegMoon } from "react-icons/fa";
 
+import { RxHamburgerMenu } from "react-icons/rx";
+
 function Navbar() {
   const {
     isLightMode,
     setIsLightMode,
     showSignOutButton,
     setShowSignOutButton,
+    showSidebar,
+    setShowSidebar,
   } = useContext(GlobalState);
 
   const navigate = useNavigate();
-
-  //   const handleAlertTimeOut = () => {
-  //     setShowSignInAlert(true);
-  //     setTimeout(() => {
-  //       setShowSignInAlert(false);
-  //     }, 3000);
-  //   };
-
-  //   const handleShowSignInAlert = () => {
-  //     if (!isLoggedIn) {
-  //       setShowSignInAlert(true);
-  //       handleAlertTimeOut();
-  //     } else {
-  //       setShowSignInAlert(false);
-  //     }
-  //   };
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
@@ -48,6 +36,14 @@ function Navbar() {
     localStorage.removeItem("user");
     navigate("/");
     setShowSignOutButton(false);
+  };
+
+  const handleShowSidebar = () => {
+    if (showSidebar) {
+      setShowSidebar(false);
+    } else {
+      setShowSidebar(true);
+    }
   };
 
   const handleTheme = () => {
@@ -83,8 +79,8 @@ function Navbar() {
         <div
           className={
             isLightMode
-              ? "flex gap-3 text-sm md:text-md lg:text-lg text-[#00e0bf] w-[50%] justify-center items-center"
-              : "flex gap-3 text-sm md:text-md lg:text-lg text-white w-[50%] justify-center items-center"
+              ? "hidden md:flex lg:flex gap-3 text-sm md:text-md lg:text-lg text-[#00e0bf] w-[50%] justify-center items-center"
+              : "hidden md:flex lg:flex gap-3 text-sm md:text-md lg:text-lg text-white w-[50%] justify-center items-center"
           }
         >
           <Link to="/" className="flex gap-2 justify-center items-center">
@@ -105,21 +101,9 @@ function Navbar() {
             {" "}
             Pricing
           </Link>
-          {/* {isLoggedIn ? (
-            <Link to="/post" className="flex gap-2 justify-center items-center">
-              Post
-            </Link>
-          ) : (
-            <button
-            //   onClick={handleShowSignInAlert}
-              className="flex gap-2 justify-center items-center"
-            >
-              Post
-            </button>
-          )} */}
         </div>
         <div className="flex gap-3 items-center">
-          {isLightMode ? (
+          {/* {isLightMode ? (
             <div onClick={handleTheme} className="text-[#023047]">
               <FaRegMoon size={20} />
             </div>
@@ -127,9 +111,10 @@ function Navbar() {
             <div onClick={handleTheme} className="text-white">
               <FiSun size={24} />
             </div>
-          )}
+          )} */}
+
           {currentUser ? (
-            <div className="w-12 h-12 bg-blue-300 rounded-full flex justify-center items-center font-bold">
+            <div className="hidden md:flex lg:flex w-12 h-12 bg-blue-300 rounded-full justify-center items-center font-bold">
               {currentUser.name[0]}
             </div>
           ) : (
@@ -152,6 +137,12 @@ function Navbar() {
               Sign Out
             </button>
           )}
+          <div
+            className="visible md:hidden lg:hidden"
+            onClick={handleShowSidebar}
+          >
+            <RxHamburgerMenu size={24} />
+          </div>
         </div>
       </div>
     </>
