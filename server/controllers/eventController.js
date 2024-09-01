@@ -5,10 +5,10 @@ export const createEvent = async (req, res) => {
     try {
         const newEvent = new Event({
             userEmail: req.body.userEmail,
+            description: req.body.description,
             caption: req.body.caption,
             date: req.body.date,
             interested: req.body.interested || 0,
-            eventId: req.body.eventId || null,  // Reference to a Post (optional)
         });
 
         await newEvent.save();
