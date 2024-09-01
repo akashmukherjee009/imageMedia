@@ -15,12 +15,38 @@ function App() {
   }, []);
   const [isLightMode, setIsLightMode] = useState(true);
   const [showSignOutButton, setShowSignOutButton] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allEvents, setAllEvents] = useState([]);
+
+  const getAllEventsHandler = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/events/");
+      const data = await response.json();
+      setAllEvents(data);
+      console.log(data);
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllEventsHandler();
+  }, []);
 
   return (
     <>
       <BrowserRouter>
         <GlobalState.Provider
-          value={{ isLightMode, showSignOutButton, setShowSignOutButton }}
+          value={{
+            isLightMode,
+            showSignOutButton,
+            setShowSignOutButton,
+            isModalOpen,
+            setIsModalOpen,
+            allEvents,
+            setAllEvents,
+          }}
         >
           <div className="App relative">
             <Navbar />
