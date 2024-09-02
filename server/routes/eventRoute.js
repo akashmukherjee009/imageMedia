@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/', createEvent);
 
 // Get all events
-router.get('/get', getAllEvents);
+router.post('/get', getAllEvents);
 
 // Get a single event by ID
 router.get('/:id', getOneEvent);

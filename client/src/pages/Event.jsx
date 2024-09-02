@@ -1,13 +1,44 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalState } from "../context";
 import CreateEventModal from "../components/CreateEventModal";
-
+import axios from "axios";
 function Event() {
+  const  [ events, setEvents ] = useState([]);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const getAllEventsHandler = async () => {
+    try {
+      console.log("Fetching events for:", currentUser); // Debugging
+      const email={
+        email:  currentUser.email 
+
+      }
+      const response = await axios.post(
+        `http://localhost:5000/events/get/`,email
+      );
+      console.log("Response:", response.data); // Debugging
+
+      setEvents(response.data);
+      // console.log(events);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
+  useEffect(() => {
+    getAllEventsHandler();
+  }, [events]);
+
+
+
+
+
+
   const { isLightMode, isModalOpen, setIsModalOpen, allEvents } =
     useContext(GlobalState);
   const [currUserEmail, setCurrUserEmail] = useState("");
 
   useEffect(() => {
+    console.log(allEvents);
+    
     const currentUser = JSON.parse(localStorage.getItem("user"));
     if (currentUser) {
       setCurrUserEmail(currentUser.userEmail);
@@ -26,10 +57,9 @@ function Event() {
   return (
     <div className="flex flex-col w-full">
       <div className="relative w-full min-h-[85vh] flex flex-col md:flex-col lg:flex-row justify-between items-start">
-        {allEvents && allEvents.length !== 0 ? (
+        {events && events.length !== 0 ? (
           <div className="w-full grid gap-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center">
-            {allEvents
-              .filter((event) => event.userEmail === currUserEmail)
+            {events
               .map((event, index) => (
                 <div key={index} className="bg-blue-200 p-5 m-5">
                   <div>{event.caption}</div>

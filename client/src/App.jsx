@@ -34,11 +34,15 @@ function App() {
 
   const getAllEventsHandler = async () => {
     try {
-      console.log("Fetching events for:", currUserEmail); // Debugging
-      const response = await axios.get(
-        `http://localhost:5000/events/get/`
+      // console.log("Fetching events for:", currUserEmail); // Debugging
+      const email={
+        email:  currUserEmail
+
+      }
+      const response = await axios.post(
+        `http://localhost:5000/events/get/`,email
       );
-      console.log("Response:", response.data); // Debugging
+      // console.log("Response:", response.data); // Debugging
 
       setAllEvents(response.data);
     } catch (error) {
