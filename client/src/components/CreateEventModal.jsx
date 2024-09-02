@@ -27,9 +27,9 @@ function CreateEventModal() {
         },
         body: JSON.stringify({
           userEmail: userEmail,
+          description: eventDescription,
           caption: eventTitle,
           date: eventDate,
-        //   eventDescription,
         }),
       });
       const data = await response.json();

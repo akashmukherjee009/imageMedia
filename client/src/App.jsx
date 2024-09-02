@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import Sidebar from "./components/Sidebar";
+import axios from "axios";
 
 function App() {
   useEffect(() => {
@@ -20,20 +21,36 @@ function App() {
   const [allEvents, setAllEvents] = useState([]);
   const [showSidebar, setShowSidebar] = useState(false);
 
+  const [currUserEmail, setCurrUserEmail] = useState("");
+
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (currentUser) {
+      setCurrUserEmail(currentUser.email);
+    } else {
+      setCurrUserEmail("");
+    }
+  }, []);
+
   const getAllEventsHandler = async () => {
     try {
-      const response = await fetch("http://localhost:5000/events/");
-      const data = await response.json();
-      setAllEvents(data);
-      console.log(response);
+      console.log("Fetching events for:", currUserEmail); // Debugging
+      const response = await axios.get(
+        `http://localhost:5000/events/get/`
+      );
+      console.log("Response:", response.data); // Debugging
+
+      setAllEvents(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching events:", error);
     }
   };
 
   useEffect(() => {
     getAllEventsHandler();
   }, []);
+
+  
 
   return (
     <>
@@ -53,9 +70,7 @@ function App() {
         >
           <div className="App relative">
             <Navbar />
-            {
-              showSidebar && <Sidebar />
-            }
+            {showSidebar && <Sidebar />}
             <Routing />
             <Footer />
           </div>
