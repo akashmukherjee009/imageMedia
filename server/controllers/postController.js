@@ -5,10 +5,12 @@ import Post from "../models/postModel.js";
 
 export const createPost = async (req, res) => {
     try {
+        const imagePaths = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+        
         const newPost = new Post({
             profile_id: req.body.profile_id,
             caption: req.body.caption,
-            image: req.file ? `/uploads/${req.file.filename}` : null, // Store image path
+            images: imagePaths,  // Store array of image paths
             likes: req.body.likes || 0,
             eventId: req.body.eventId
         });
