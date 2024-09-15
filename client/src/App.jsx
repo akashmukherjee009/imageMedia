@@ -17,7 +17,10 @@ function App() {
   }, []);
   const [isLightMode, setIsLightMode] = useState(true);
   const [showSignOutButton, setShowSignOutButton] = useState(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openUploadModal, setOpenUploadModal] = useState(false);
+
   const [allEvents, setAllEvents] = useState([]);
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -35,12 +38,12 @@ function App() {
   const getAllEventsHandler = async () => {
     try {
       // console.log("Fetching events for:", currUserEmail); // Debugging
-      const email={
-        email:  currUserEmail
-
-      }
+      const email = {
+        email: currUserEmail,
+      };
       const response = await axios.post(
-        `http://localhost:5000/events/get/`,email
+        `http://localhost:5000/events/get/`,
+        email
       );
       // console.log("Response:", response.data); // Debugging
 
@@ -53,8 +56,6 @@ function App() {
   useEffect(() => {
     getAllEventsHandler();
   }, []);
-
-  
 
   return (
     <>
@@ -70,6 +71,8 @@ function App() {
             setAllEvents,
             showSidebar,
             setShowSidebar,
+            openUploadModal,
+            setOpenUploadModal,
           }}
         >
           <div className="App relative">
