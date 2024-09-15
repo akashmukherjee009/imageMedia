@@ -7,7 +7,6 @@ const postSchema = new mongoose.Schema({
     likes: { type: Number, default: 0 },
     eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: false },
 });
-
 const Post = mongoose.model('Post', postSchema);
 
 export default Post;

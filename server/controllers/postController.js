@@ -5,6 +5,8 @@ import Post from "../models/postModel.js";
 
 export const createPost = async (req, res) => {
     try {
+        const imagepath = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+        
         console.log(req.files); // Log the uploaded files
 
         // Check if files were uploaded
@@ -12,13 +14,12 @@ export const createPost = async (req, res) => {
             return res.status(400).json({ message: "No image files uploaded." });
         }
 
-        // Map the uploaded file paths
-        const imagePaths = req.files.map(file => `/uploads/${file.filename}`);
+
 
         const newPost = new Post({
             profile_id: req.body.profile_id,
             caption: req.body.caption,
-            image: imagePaths, // Store the array of image paths
+            image: req.file ? `/uploads/${req.file.filename}` : null, // Store image path
             likes: req.body.likes || 0,
             eventId: req.body.eventId
         });
