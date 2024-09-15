@@ -33,7 +33,7 @@ router.post("/sign-in", loginUser);
 
 // Apply `upload.single('image')` middleware to the POST route
 router.get("/", getAllPost);
-router.post("/", upload.single("image"), createPost);
+router.post("/", upload.array("image", 5), createPost);
 router.get("/:id", getOnePost);
 router.put("/:id", updateOnePOst);
 router.delete("/:id", deleteOnePost);
